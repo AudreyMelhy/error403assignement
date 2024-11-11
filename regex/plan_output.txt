@@ -1,0 +1,82 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # aws_wafv2_regex_pattern_set.allow_table_style[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_wafv2_regex_pattern_set" "allow_table_style" {
+      [32m+[0m [0m[1m[0marn[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mlock_token[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m       = "AllowTableStyle"
+      [32m+[0m [0m[1m[0mscope[0m[0m      = "REGIONAL"
+      [32m+[0m [0m[1m[0mtags_all[0m[0m   = (known after apply)
+
+      [32m+[0m [0mregular_expression {
+          [32m+[0m [0m[1m[0mregex_string[0m[0m = "<table[^>]*style=\"width:[0-9]+pt;\""
+        }
+    }
+
+[1m  # aws_wafv2_web_acl.regex_xss_protection[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_wafv2_web_acl" "regex_xss_protection" {
+      [32m+[0m [0m[1m[0mapplication_integration_url[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0marn[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mcapacity[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mlock_token[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "regex_xss_protection"
+      [32m+[0m [0m[1m[0mscope[0m[0m                       = "REGIONAL"
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                    = (known after apply)
+
+      [32m+[0m [0mdefault_action {
+
+          [32m+[0m [0mblock {
+            }
+        }
+
+      [32m+[0m [0mrule {
+          [32m+[0m [0m[1m[0mname[0m[0m     = "AllowTableWidthStyle"
+          [32m+[0m [0m[1m[0mpriority[0m[0m = 1
+
+          [32m+[0m [0maction {
+              [32m+[0m [0mallow {
+                }
+            }
+
+          [32m+[0m [0mstatement {
+
+              [32m+[0m [0mregex_pattern_set_reference_statement {
+                  [32m+[0m [0m[1m[0marn[0m[0m = (known after apply)
+
+                  [32m+[0m [0mfield_to_match {
+
+                      [32m+[0m [0mbody {
+                          [32m+[0m [0m[1m[0moversize_handling[0m[0m = "CONTINUE"
+                        }
+                    }
+
+                  [32m+[0m [0mtext_transformation {
+                      [32m+[0m [0m[1m[0mpriority[0m[0m = 0
+                      [32m+[0m [0m[1m[0mtype[0m[0m     = "NONE"
+                    }
+                }
+            }
+
+          [32m+[0m [0mvisibility_config {
+              [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+              [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "AllowTableWidthStyle"
+              [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+            }
+        }
+
+      [32m+[0m [0mvisibility_config {
+          [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+          [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "CustomXSSProtection"
+          [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+        }
+    }
+
+[0m[1mPlan:[0m 2 to add, 0 to change, 0 to destroy.
+[0m

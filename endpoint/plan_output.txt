@@ -1,0 +1,90 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # aws_wafv2_web_acl.ignore_specific_endpoint[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_wafv2_web_acl" "ignore_specific_endpoint" {
+      [32m+[0m [0m[1m[0mapplication_integration_url[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0marn[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mcapacity[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mlock_token[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "ignore_specific_endpoint_acl"
+      [32m+[0m [0m[1m[0mscope[0m[0m                       = "REGIONAL"
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                    = (known after apply)
+
+      [32m+[0m [0mdefault_action {
+
+          [32m+[0m [0mblock {
+            }
+        }
+
+      [32m+[0m [0mrule {
+          [32m+[0m [0m[1m[0mname[0m[0m     = "AllowHtmlEditorEndpoint"
+          [32m+[0m [0m[1m[0mpriority[0m[0m = 1
+
+          [32m+[0m [0maction {
+              [32m+[0m [0mallow {
+                }
+            }
+
+          [32m+[0m [0mstatement {
+              [32m+[0m [0mand_statement {
+                  [32m+[0m [0mstatement {
+
+                      [32m+[0m [0mbyte_match_statement {
+                          [32m+[0m [0m[1m[0mpositional_constraint[0m[0m = "EXACTLY"
+                          [32m+[0m [0m[1m[0msearch_string[0m[0m         = "/submitContent"
+
+                          [32m+[0m [0mfield_to_match {
+
+                              [32m+[0m [0muri_path {}
+                            }
+
+                          [32m+[0m [0mtext_transformation {
+                              [32m+[0m [0m[1m[0mpriority[0m[0m = 0
+                              [32m+[0m [0m[1m[0mtype[0m[0m     = "NONE"
+                            }
+                        }
+                    }
+                  [32m+[0m [0mstatement {
+
+                      [32m+[0m [0mbyte_match_statement {
+                          [32m+[0m [0m[1m[0mpositional_constraint[0m[0m = "EXACTLY"
+                          [32m+[0m [0m[1m[0msearch_string[0m[0m         = "CKEdit"
+
+                          [32m+[0m [0mfield_to_match {
+
+                              [32m+[0m [0msingle_header {
+                                  [32m+[0m [0m[1m[0mname[0m[0m = "x-trusted-source"
+                                }
+                            }
+
+                          [32m+[0m [0mtext_transformation {
+                              [32m+[0m [0m[1m[0mpriority[0m[0m = 0
+                              [32m+[0m [0m[1m[0mtype[0m[0m     = "NONE"
+                            }
+                        }
+                    }
+                }
+            }
+
+          [32m+[0m [0mvisibility_config {
+              [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+              [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "AllowHtmlEditorEndpoint"
+              [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+            }
+        }
+
+      [32m+[0m [0mvisibility_config {
+          [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+          [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "IgnoreSpecificEndpointACL"
+          [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+        }
+    }
+
+[0m[1mPlan:[0m 1 to add, 0 to change, 0 to destroy.
+[0m

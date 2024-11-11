@@ -1,0 +1,93 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # aws_wafv2_web_acl.example[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_wafv2_web_acl" "example" {
+      [32m+[0m [0m[1m[0mapplication_integration_url[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0marn[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mcapacity[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mdescription[0m[0m                 = "Web ACL with allowance for specific table style"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mlock_token[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "byte-match-web-acl"
+      [32m+[0m [0m[1m[0mscope[0m[0m                       = "REGIONAL"
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                    = (known after apply)
+
+      [32m+[0m [0mdefault_action {
+
+          [32m+[0m [0mblock {
+            }
+        }
+
+      [32m+[0m [0mrule {
+          [32m+[0m [0m[1m[0mname[0m[0m     = "AllowSpecificTableStyle"
+          [32m+[0m [0m[1m[0mpriority[0m[0m = 2
+
+          [32m+[0m [0maction {
+              [32m+[0m [0mallow {
+                }
+            }
+
+          [32m+[0m [0mstatement {
+
+              [32m+[0m [0mbyte_match_statement {
+                  [32m+[0m [0m[1m[0mpositional_constraint[0m[0m = "CONTAINS"
+                  [32m+[0m [0m[1m[0msearch_string[0m[0m         = "<table style=\"width:525pt;\""
+
+                  [32m+[0m [0mfield_to_match {
+
+                      [32m+[0m [0mbody {
+                          [32m+[0m [0m[1m[0moversize_handling[0m[0m = "CONTINUE"
+                        }
+                    }
+
+                  [32m+[0m [0mtext_transformation {
+                      [32m+[0m [0m[1m[0mpriority[0m[0m = 0
+                      [32m+[0m [0m[1m[0mtype[0m[0m     = "NONE"
+                    }
+                }
+            }
+
+          [32m+[0m [0mvisibility_config {
+              [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+              [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "AllowSpecificTableStyle"
+              [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+            }
+        }
+      [32m+[0m [0mrule {
+          [32m+[0m [0m[1m[0mname[0m[0m     = "AWSManagedRules"
+          [32m+[0m [0m[1m[0mpriority[0m[0m = 1
+
+          [32m+[0m [0moverride_action {
+
+              [32m+[0m [0mnone {}
+            }
+
+          [32m+[0m [0mstatement {
+
+              [32m+[0m [0mmanaged_rule_group_statement {
+                  [32m+[0m [0m[1m[0mname[0m[0m        = "AWSManagedRulesCommonRuleSet"
+                  [32m+[0m [0m[1m[0mvendor_name[0m[0m = "AWS"
+                }
+            }
+
+          [32m+[0m [0mvisibility_config {
+              [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+              [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "AWSManagedRules"
+              [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+            }
+        }
+
+      [32m+[0m [0mvisibility_config {
+          [32m+[0m [0m[1m[0mcloudwatch_metrics_enabled[0m[0m = true
+          [32m+[0m [0m[1m[0mmetric_name[0m[0m                = "MyWebACL"
+          [32m+[0m [0m[1m[0msampled_requests_enabled[0m[0m   = true
+        }
+    }
+
+[0m[1mPlan:[0m 1 to add, 0 to change, 0 to destroy.
+[0m
